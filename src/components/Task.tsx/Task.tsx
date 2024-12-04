@@ -1,34 +1,36 @@
 
-interface TaskProps {
-  id: number;
-  title: string;
-  description: string;
-  deadline: Date;
-  assigned_to: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { ITask } from "../../types";
 
-export default function Task({id,
+export default function Task({
   title,
   description,
   deadline,
   assigned_to,
   status,
   createdAt,
-  updatedAt
- }: TaskProps) {
+  updatedAt,
+}:ITask) {
+  
+
   return (
-    <div>
-      <h1>{`id: ${id}`}</h1>
-      <h2>{`title: ${title}`}</h2>
-      <p>{`desc: ${description}`}</p>
-      <p>{`deadline: ${deadline.toString()}`}</p>
-      <p>{`assigned_to : ${assigned_to}`}</p>
-      <p>{`status: ${status}`}</p>
-      <p>{`createdAt: ${createdAt.toString()}`}</p>
-      <p>{`updatedAt: ${updatedAt.toString()}`}</p>
-    </div>
-  )
+    <tr className="hover:bg-gray-50 text-gray-800 text-sm">
+      <td className="p-3 border-b">{title}</td>
+      <td className="p-3 border-b">{description}</td>
+      <td className="p-3 border-b">{new Date(deadline).toLocaleString()}</td>
+      <td className="p-3 border-b">{assigned_to}</td>
+      <td
+        className={`p-3 border-b ${
+          status === "completed"
+            ? "text-green-600 font-semibold"
+            : status === "in-progress"
+            ? "text-yellow-600 font-semibold"
+            : "text-red-600 font-semibold"
+        }`}
+      >
+        {status}
+      </td>
+      <td className="p-3 border-b">{new Date(createdAt).toLocaleString()}</td>
+      <td className="p-3 border-b">{new Date(updatedAt).toLocaleString()}</td>
+    </tr>
+  );
 }

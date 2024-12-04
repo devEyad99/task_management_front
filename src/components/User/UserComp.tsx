@@ -1,6 +1,6 @@
 //..
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { actGetUsers } from "../../store/users/usersSlice";
+import { actGetUsers } from "../../store/users/usersTasksSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
