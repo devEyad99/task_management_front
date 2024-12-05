@@ -61,19 +61,21 @@ export default function Login() {
         >
           {loading === 'pending' ? 'wait while logging in...' : 'Log In'}
         </button>
+        {error && <p className="mt-4 text-red-500">Error: {error}</p>}
       </form>
 
       {/* Show error message */}
-      {error && <p className="mt-4 text-red-500">Error: {error}</p>}
-
-      {/* Show success message */}
-      {/* {loading === 'succeeded' && (
-        <div>
-          <h3>Welcome, {user?.name}</h3>
-          <p>Email: {user?.email}</p>
-          <p>{message}</p>
-        </div>
-      )} */}
     </>
   );
 }
+
+// {
+//  if(error){
+//     return <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+//       <p>{error}</p>
+//     </div>
+//  }else{
+//   {loading === 'pending' ? 'wait while logging in...' : 'Log In'}
+//  }
+
+// }
