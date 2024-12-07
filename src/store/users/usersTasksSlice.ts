@@ -6,6 +6,8 @@ import actGetAllTasks from './act/actGetAllTasks';
 
 interface TasksState {
   tasks: ITask[];
+  totalTasks?: number;
+  totalPages?: number;
   loading: TLoading;
   message: string | null;
   error: string | null;
@@ -13,6 +15,8 @@ interface TasksState {
 
 const initialState: TasksState = {
   tasks: [],
+  totalTasks: 0,
+  totalPages: 0,
   loading: 'idle',
   message: null,
   error: null,
@@ -24,6 +28,8 @@ const usersTasksSlice = createSlice({
   reducers: {
     actClearTasks: (state) => {
       state.tasks = [];
+      state.totalTasks = 0;
+      state.totalPages = 0;
       state.loading = 'idle';
       state.message = null;
       state.error = null;
@@ -58,6 +64,8 @@ const usersTasksSlice = createSlice({
       state.error = null;
       state.message = action.payload.message;
       state.tasks = action.payload.tasks;
+      state.totalTasks = action.payload.totalTasks;
+      state.totalPages = action.payload.totalPages;
     });
     builder.addCase(actGetAllTasks.rejected, (state, action) => {
       state.loading = 'failed';
