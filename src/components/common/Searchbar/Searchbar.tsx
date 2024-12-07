@@ -1,8 +1,54 @@
+import { useEffect, useState, useRef } from "react";
+import { useAppDispatch } from "../../../store/hooks";
+import { actGetAllTasks } from "../../../store/users/usersTasksSlice";
+
+
 export default function Searchbar() {
+  const dispatch = useAppDispatch();
+  const [query, setQuery] = useState("");
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    // Clear the existing timeout if the user types again
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    // Set a new timeout to dispatch the action after a delay
+    debounceTimeout.current = setTimeout(() => {
+      if (value.trim() === "") {
+        // Dispatch an action to get all tasks when the query is cleared
+        dispatch(actGetAllTasks({ title: "" }));
+        console.log("Dispatched action to fetch all tasks");
+      } else {
+        // Dispatch the search action with the query
+        dispatch(actGetAllTasks({ title: value }));
+        console.log("Dispatched search for:", value);
+      }
+    }, 500); // 500ms debounce delay
+  };
+
+  useEffect(() => {
+    // Cleanup timeout on component unmount
+    return () => {
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
+      }
+    };
+  }, []);
+
+  console.log('fire searchbar');
+  
+
   return (
     <div className="relative mx-auto max-w-full lg:max-w-md w-full">
       <input
         type="text"
+        value={query}
+        onChange={handleInputChange}
         placeholder="Search tasks..."
         className="border-2 border-gray-300 bg-white text-gray-700 font-bold h-10 w-full px-5 pr-10 rounded-lg text-sm focus:outline-none focus:border-blue-500"
       />
@@ -23,3 +69,4 @@ export default function Searchbar() {
     </div>
   );
 }
+

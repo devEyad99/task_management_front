@@ -4,12 +4,14 @@ import isAxiosHandler from '../../../utils/isAxiosError';
 
 const actGetAllTasks = createAsyncThunk(
   'tasks/fetchAllTasks',
-  async (page: number, thunkAPI) => {
+  async ({ page, title }: { page?: number; title?: string }, thunkAPI) => {
     const { rejectWithValue, signal } = thunkAPI;
     try {
       const token = JSON.parse(localStorage.getItem('auth') || '{}').token;
       const res = await axios.get(
-        `http://localhost:3001/task/getAllTasks?page=${page}`,
+        `http://localhost:3001/task/getAllTasks?page=${page}&title=${
+          title || ''
+        }`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

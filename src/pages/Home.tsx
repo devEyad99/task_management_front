@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { actGetAllTasks } from '../store/users/usersTasksSlice';
 import TasksTable from '../components/Task/TaskTable';
+import { actLogout } from '../store/Auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { tasks, error, loading, totalTasks, totalPages } = useAppSelector(
     (state) => state.tasks
   );
@@ -13,10 +16,21 @@ export default function Home() {
   const [isBtnOpen, setIsBtnOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    if(error === "Invalid token. Please log in again.")
+    {
+      localStorage.removeItem('auth');
+      dispatch(actLogout());
+      setTimeout(()=>{
+        navigate('/login');
+      }, 2000)
+    }
+  }, [navigate, dispatch, error])
+
   // Fetch tasks when `currentPage` changes
   useEffect(() => {
     if (isBtnOpen) {
-      dispatch(actGetAllTasks(currentPage));
+      dispatch(actGetAllTasks({ page: currentPage }));
     }
   }, [dispatch, currentPage, isBtnOpen]);
 
