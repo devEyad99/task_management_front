@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { actGetAllTasks } from "../../../store/users/usersTasksSlice";
 
-
 export default function Searchbar() {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState("");
@@ -22,11 +21,10 @@ export default function Searchbar() {
       if (value.trim() === "") {
         // Dispatch an action to get all tasks when the query is cleared
         dispatch(actGetAllTasks({ title: "" }));
-        console.log("Dispatched action to fetch all tasks");
       } else {
         // Dispatch the search action with the query
         dispatch(actGetAllTasks({ title: value }));
-        console.log("Dispatched search for:", value);
+    
       }
     }, 500); // 500ms debounce delay
   };
@@ -40,8 +38,12 @@ export default function Searchbar() {
     };
   }, []);
 
-  console.log('fire searchbar');
-  
+  // Use the `query` state to log only when it changes
+  useEffect(() => {
+    if (query) {
+      console.log('fire search bar');
+    }
+  }, [query]);
 
   return (
     <div className="relative mx-auto max-w-full lg:max-w-md w-full">
@@ -69,4 +71,3 @@ export default function Searchbar() {
     </div>
   );
 }
-
