@@ -4,6 +4,7 @@ import { actClearTasks, actGetUsersTasks } from "../store/users/usersTasksSlice"
 import { useNavigate } from "react-router-dom";
 import { actLogout } from "../store/Auth/authSlice";
 import TasksTable from "../components/Task/TaskTable"
+import PageLayout from "../layouts/PageLayout/PageLayout";
 
 export default function Tasks() {
   const dispatch = useAppDispatch();
@@ -37,9 +38,9 @@ export default function Tasks() {
     </div>
   } 
   return (
-    <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
-    <h1 className="text-2xl font-bold text-gray-800 mb-6">My Tasks</h1>
-    <TasksTable tasks={tasks} />
-  </div>
+    <PageLayout title="My Tasks">
+      <TasksTable tasks={tasks} />
+    </PageLayout>
+    
 );
 }

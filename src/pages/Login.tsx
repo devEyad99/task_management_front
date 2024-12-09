@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actAuthLogin } from "../store/Auth/authSlice";
+import PageLayout from "../layouts/PageLayout/PageLayout";
+import Input from "../components/common/Input/Input";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -20,40 +22,31 @@ export default function Login() {
   }
 
   return (
-    <>
-      <h1 className="flex flex-col items-center mb-3 text-xl">Sign In</h1>
+    <PageLayout title="Sign In">
       <form
         onSubmit={handleSubmit}
         className="mt-12 space-y-6 max-w-md mx-auto bg-white p-6 rounded-lg shadow-md hover:drop-shadow-xl"
       >
-        <div className="mb-2">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            className="mt-1 block w-full h-12 rounded-md shadow-sm sm:text-sm"
-            type="email"
-            id="email"
-            placeholder="enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mt-2">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            className="mt-1 block w-full h-12 rounded-md shadow-sm sm:text-sm"
-            type="password"
-            placeholder="enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            id="password"
-            required
-          />
-        </div>
+        <Input
+        label="Email"
+        htmlFor="email"
+        type="email"
+        id="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="enter email"
+        />
+       
+        <Input
+        label="Password"
+        htmlFor="password"
+        type="password"
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="enter password"
+        />
+
         <button
           disabled={loading === 'pending'}
           type="submit"
@@ -65,6 +58,6 @@ export default function Login() {
       </form>
 
       {/* Show error message */}
-    </>
+    </PageLayout>
   );
 }

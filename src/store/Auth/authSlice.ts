@@ -1,6 +1,7 @@
 //..
 import { createSlice } from '@reduxjs/toolkit';
 import actAuthLogin from './act/actAuthLogin';
+import actAuthSignup from './act/actAuthSignup';
 import { TLoading, IUsers } from '../../types';
 
 interface IAuthState {
@@ -34,6 +35,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Login
     builder.addCase(actAuthLogin.pending, (state) => {
       state.loading = 'pending';
       state.error = null;
@@ -61,9 +63,26 @@ const authSlice = createSlice({
       state.error = action.payload as string; // Use the message from rejectWithValue
       state.message = null; // Clear success messages
     });
+    // sign up
+    builder.addCase(actAuthSignup.pending, (state) => {
+      state.loading = 'pending';
+      state.error = null;
+      state.message = null;
+    });
+    builder.addCase(actAuthSignup.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+      state.error = null;
+      state.user = action.payload?.user ?? null;
+      state.message = action.payload?.message ?? null;
+    });
+    builder.addCase(actAuthSignup.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.payload as string; // Use the message from rejectWithValue
+      state.message = null; // Clear success messages
+    });
   },
 });
 
-export { actAuthLogin };
+export { actAuthLogin, actAuthSignup };
 export const { actLogout } = authSlice.actions;
 export default authSlice.reducer;
