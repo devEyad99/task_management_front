@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { actGetUsersTasks } from "../store/users/usersTasksSlice";
 import TasksTable from "../components/Task/TaskTable";
+import PageLayout from "../layouts/PageLayout/PageLayout";
 
 export default function UserProfile() {
   const { user } = useAppSelector((state) => state.auth);
@@ -13,9 +14,9 @@ export default function UserProfile() {
   }, [dispatch]);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      {/* User Profile Section */}
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+
+    <PageLayout title="My Profile">
+       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <div className="flex items-center space-x-6">
           <div className="w-24 h-24">
           <img
@@ -45,6 +46,6 @@ export default function UserProfile() {
           <TasksTable tasks={tasks} />
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }

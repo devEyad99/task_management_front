@@ -6,9 +6,17 @@ interface ProtectedProps {
 }
 
 export const Protected = ({ children }: ProtectedProps) => {
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, token } = useAppSelector((state) => state.auth);
  const role = user?.role;
- 
+   
+  if(!token){
+    return (
+      <div className="text-red-500 text-center mt-8">
+        You are not logged in, Please log in.
+      </div>
+    );
+  }
+
   if (role !== "admin") {
     return (
       <div className="text-red-500 text-center mt-8">
