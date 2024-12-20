@@ -10,6 +10,7 @@ import UserTasks from '../pages/UserTasks';
 import { Protected } from '../components/common/Protected/Protucted';
 import AllTasks from '../pages/AllTasks';
 import CreateTasks from '../pages/CreateTasks';
+import GetAllUsers from '../pages/GetAllUsers';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
+      {
+        path: 'users',
+        element: (
+          <Protected>
+            <GetAllUsers/>
+          </Protected>
+        ),
+      }
     ],
   },
 ]);

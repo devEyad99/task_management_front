@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useAppDispatch } from "../../../store/hooks";
-import { actGetAllTasks } from "../../../store/users/usersTasksSlice";
+import { actGetAllTasks } from "../../../store/tasks/usersTasksSlice";
 
 export default function Searchbar() {
   const dispatch = useAppDispatch();

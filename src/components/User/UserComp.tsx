@@ -1,43 +1,23 @@
 //..
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { actGetUsers } from "../../store/users/usersTasksSlice";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { IUsers } from "../../types";
 
-
-
-export default function User() {
-  const dispatch = useAppDispatch();
-  const {users, loading, error} = useAppSelector((state) => state.users);
- 
-  console.log(users);
+export default function UserComp({
+  id,
+  email, 
+  name,
+  role,
+  createdAt,
+}: IUsers) {
   
-  useEffect(() => {
-    dispatch(actGetUsers());
-  }, [dispatch]);
-  if (loading === 'pending') {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-  console.log('fire');
   
   return (
-    <div>
-      <div>
-        {users.map((user) => (
-          <div key={user.id}>
-            <Link to={`/user/${user.id}`}>
-              <img src={user.profile_image} alt={user.name} />
-              <h2>{user.name}</h2>
-              <p>{user.email}</p>
-              <p>{user.role}</p>
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+    <tr className="hover:bg-gray-50 text-gray-800 text-sm">
+      <td className="p-3 border-b text-right">{id}</td>
+      <td className="p-3 border-b text-right">{name}</td>
+      <td className="p-3 border-b text-right">{email}</td>
+      <td className="p-3 border-b text-right">{role}</td>
+      <td className="p-3 border-b text-right">{new Date(createdAt).toLocaleDateString()}</td>
+    </tr>
   );
 
 }

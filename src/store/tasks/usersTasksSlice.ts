@@ -1,5 +1,5 @@
 //..
-import { TLoading, ITask } from './../../types';
+import { TLoading, ITask } from '../../types';
 import { createSlice } from '@reduxjs/toolkit';
 import actGetUsersTasks from './act/actGetUsersTasks';
 import actGetAllTasks from './act/actGetAllTasks';

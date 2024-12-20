@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { actClearTasks, actGetUsersTasks } from "../store/users/usersTasksSlice";
+import { actClearTasks, actGetUsersTasks } from "../store/tasks/usersTasksSlice";
 import { useNavigate } from "react-router-dom";
 import { actLogout } from "../store/Auth/authSlice";
 import TasksTable from "../components/Task/TaskTable"

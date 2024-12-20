@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { actGetUsersTasks } from "../store/users/usersTasksSlice";
+import { actGetUsersTasks } from "../store/tasks/usersTasksSlice";
 import TasksTable from "../components/Task/TaskTable";
 import PageLayout from "../layouts/PageLayout/PageLayout";
 
