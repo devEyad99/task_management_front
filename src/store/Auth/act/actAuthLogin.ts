@@ -21,7 +21,7 @@ const actAuthLogin = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const response = await axios.post<TResponse>(
-        'http://localhost:3001/auth/login',
+        'http://localhost:3001/api/auth/login',
         formDate
       );
       return response.data;

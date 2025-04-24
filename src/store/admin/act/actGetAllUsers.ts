@@ -10,7 +10,7 @@ const actGetAllUsers = createAsyncThunk(
     try {
       const token = JSON.parse(localStorage.getItem('auth') || '{}').token;
       const response = await axios.get(
-        'http://localhost:3001/user/getAllUsers',
+        'http://localhost:3001/api/user/getAllUsers',
         {
           headers: {
             Authorization: `Bearer ${token}`,

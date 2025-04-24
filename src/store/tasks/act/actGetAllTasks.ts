@@ -9,7 +9,7 @@ const actGetAllTasks = createAsyncThunk(
     try {
       const token = JSON.parse(localStorage.getItem('auth') || '{}').token;
       const res = await axios.get(
-        `http://localhost:3001/task/getAllTasks?page=${page}&title=${
+        `http://localhost:3001/api/task/getAllTasks?page=${page}&title=${
           title || ''
         }`,
         {

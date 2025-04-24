@@ -23,7 +23,7 @@ const actAuthSignup = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const response = await axios.post<TResponse>(
-        'http://localhost:3001/auth/signup',
+        'http://localhost:3001/api/auth/signup',
         formDate
       );
       return response.data;
